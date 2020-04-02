@@ -1,7 +1,7 @@
 #!/bin/bash
 
 TMP=/home/tianyu/NAS/TempVideo
-WD=$TMP/toBilibili
+WD=$TMP/toBilibiliScale
 OUTPUT=$TMP/output
 
 midkr -p $OUTPUT
