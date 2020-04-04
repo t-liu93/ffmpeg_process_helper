@@ -4,7 +4,7 @@ FFMPEG=/home/tianyu/ffmpeg/bin
 TMP=/home/tianyu/NAS/TempVideo
 WD=$TMP/toArchive
 OUTPUT=$TMP/output
-#OUTFILE=$(date +"%Y-%m-%d_%H-%M-%S").mp4
+OUTFILE=$(date +"%Y-%m-%d_%H-%M-%S").mp4
 TMPFILE=/home/tianyu/$OUTFILE
 
 mkdir -p $OUTPUT
