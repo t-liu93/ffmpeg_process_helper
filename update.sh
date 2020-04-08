@@ -39,7 +39,7 @@ PATH="$FFMPEG/bin:$PATH" make -j $(nproc) && \
 make install
 
 # libx265
-sudo apt-get install mercurial libnuma-dev && \
+sudo apt-get -y install mercurial libnuma-dev && \
 cd $FFMPEG/ffmpeg_sources && \
 if cd x265 2> /dev/null; then hg pull && hg update && cd ..; else hg clone https://bitbucket.org/multicoreware/x265; fi && \
 cd x265/build/linux && \
