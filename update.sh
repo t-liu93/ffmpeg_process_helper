@@ -4,7 +4,7 @@ FFMPEG="$HOME/ffmpeg"
 FFBUILD="$HOME/ffmpeg_build"
 
 # remove
-rm -rf $FFBUILD $FFMPEG/bin/{ffmpeg,ffprobe,ffplay,x264,x265}
+rm -rf $FFBUILD $FFMPEG/bin/{ffmpeg,ffprobe,ffplay,x264,x265} $FFMPEG/ffmpeg_sources
 
 # Update dependencies
 sudo apt-get update -qq && sudo apt-get -y install \
@@ -29,6 +29,9 @@ sudo apt-get update -qq && sudo apt-get -y install \
   zlib1g-dev
 
 mkdir -p $FFMPEG/ffmpeg_sources $FFMPEG/bin
+
+# some assembler
+sudo apt-get -y install nasm yasm
 
 # libx264
 cd $FFMPEG/ffmpeg_sources && \
