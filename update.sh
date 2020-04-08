@@ -86,7 +86,6 @@ PATH="$FFMPEG/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./co
   --extra-libs="-lpthread -lm" \
   --bindir="$FFMPEG/bin" \
   --enable-gpl \
-  --enable-libaom \
   --enable-libass \
   --enable-libfdk-aac \
   --enable-libfreetype \
