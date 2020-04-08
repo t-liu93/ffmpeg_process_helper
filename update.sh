@@ -57,6 +57,7 @@ cd libvpx && \
 PATH="$FFMPEG/bin:$PATH" ./configure --prefix="$HOME/ffmpeg_build" --disable-examples --disable-unit-tests --enable-vp9-highbitdepth --as=yasm && \
 PATH="$FFMPEG/bin:$PATH" make -j $(nproc) && \
 make install
+cp $HOME/ffmpeg_build/bin/x265 $FFMPEG/bin
 
 # libfdk-aac
 cd $FFMPEG/ffmpeg_sources && \
