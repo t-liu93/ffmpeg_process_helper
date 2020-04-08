@@ -1,7 +1,7 @@
 #!/bin/bash
 
-FFMPEG="~/ffmpeg"
-FFBUILD="~/ffmpeg_build"
+FFMPEG="$HOME/ffmpeg"
+FFBUILD="$HOME/ffmpeg_build"
 
 # remove
 rm -rf $FFBUILD $FFMPEG/bin/{ffmpeg,ffprobe,ffplay,x264,x265}
@@ -35,7 +35,7 @@ cd $FFMPEG/ffmpeg_sources && \
 git -C x264 pull 2> /dev/null || git clone --depth 1 https://code.videolan.org/videolan/x264.git && \
 cd x264 && \
 PATH="$FFMPEG/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure --prefix="$HOME/ffmpeg_build" --bindir="$FFMPEG/bin" --enable-static --enable-pic && \
-PATH="$FFMPEG/bin:$PATH" make && \
+PATH="$FFMPEG/bin:$PATH" make -j $(nproc) && \
 make install
 
 # libx265
@@ -44,7 +44,7 @@ cd $FFMPEG/ffmpeg_sources && \
 if cd x265 2> /dev/null; then hg pull && hg update && cd ..; else hg clone https://bitbucket.org/multicoreware/x265; fi && \
 cd x265/build/linux && \
 PATH="$FFMPEG/bin:$PATH" cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="$HOME/ffmpeg_build" -DENABLE_SHARED=off ../../source && \
-PATH="$FFMPEG/bin:$PATH" make && \
+PATH="$FFMPEG/bin:$PATH" make -j $(nproc) && \
 make install
 
 # libvpx
@@ -52,7 +52,7 @@ cd $FFMPEG/ffmpeg_sources && \
 git -C libvpx pull 2> /dev/null || git clone --depth 1 https://chromium.googlesource.com/webm/libvpx.git && \
 cd libvpx && \
 PATH="$FFMPEG/bin:$PATH" ./configure --prefix="$HOME/ffmpeg_build" --disable-examples --disable-unit-tests --enable-vp9-highbitdepth --as=yasm && \
-PATH="$FFMPEG/bin:$PATH" make && \
+PATH="$FFMPEG/bin:$PATH" make -j $(nproc) && \
 make install
 
 # libfdk-aac
@@ -61,7 +61,7 @@ git -C fdk-aac pull 2> /dev/null || git clone --depth 1 https://github.com/mstor
 cd fdk-aac && \
 autoreconf -fiv && \
 ./configure --prefix="$HOME/ffmpeg_build" --disable-shared && \
-make && \
+make -j $(nproc) && \
 make install
 
 # libopus
@@ -70,7 +70,7 @@ git -C opus pull 2> /dev/null || git clone --depth 1 https://github.com/xiph/opu
 cd opus && \
 ./autogen.sh && \
 ./configure --prefix="$HOME/ffmpeg_build" --disable-shared && \
-make && \
+make -j $(nproc) && \
 make install
 
 # Complication
@@ -96,6 +96,6 @@ PATH="$FFMPEG/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./co
   --enable-libx264 \
   --enable-libx265 \
   --enable-nonfree && \
-PATH="$FFMPEG/bin:$PATH" make && \
+PATH="$FFMPEG/bin:$PATH" make -j $(nproc) && \
 make install && \
 hash -r
