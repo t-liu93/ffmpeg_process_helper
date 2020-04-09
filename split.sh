@@ -20,7 +20,7 @@ for file in $PWD/*.mkv; do
     # track 1, a.k.a. audio track 0 is background sound
     mkvextract $PWD/$filename tracks 1:$OUTPUT/"$filename_noext"_1bg.wav
     # track 2, a.k.a. audio track 1 is narrator track
-    mkvextract $PWD/$filename tracks 1:$OUTPUT/"$filename_noext"_2nr.wav
+    mkvextract $PWD/$filename tracks 2:$OUTPUT/"$filename_noext"_2nr.wav
 
     rm $file
 done
