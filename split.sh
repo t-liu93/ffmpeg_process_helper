@@ -3,20 +3,27 @@
 OUTPUT=$1
 
 if [ -z "$OUTPUT" ]; then
-    "No output dir specified!"
+    echo "No output dir specified!"
     exit 1
 fi
 
 mkdir -p $OUTPUT
 
-#Extract video as mp4 using ffmpeg copy
-find . -name '*.mkv' -exec /home/tianyu/ffmpeg/bin/ffmpeg -i {} -c:v copy -an $OUTPUT/{}.mp4 \;
+for file in $PWD/*.mkv; do
+    filename=${file##*/}
+    filename_noext=${filename%.*}
 
-#Extract audio as wav using mkvextract
-find . -name '*.mkv' -exec mkvextract {} tracks 1:$OUTPUT/{}_bg.wav \;
-find . -name '*.mkv' -exec mkvextract {} tracks 2:$OUTPUT/{}_na.wav \;
+    # Extract video as mp4 using ffmpeg copy
+    /home/tianyu/ffmpeg/bin/ffmpeg -i $PWD/$filename -c:v copy -an $OUTPUT/"$filename_noext"_0vid.mp4
+
+    # Extract audio as wav using mkvextract
+    # track 1, a.k.a. audio track 0 is background sound
+    mkvextract $PWD/$filename tracks 1:$OUTPUT/"$filename_noext"_1bg.wav
+    # track 2, a.k.a. audio track 1 is narrator track
+    mkvextract $PWD/$filename tracks 1:$OUTPUT/"$filename_noext"_2nr.wav
+
+    rm $file
+done
 
 chown -R tianyu:smb $OUTPUT
 chmod -R 0770 $OUTPUT
-
-find . -name '*.mkv' -exec rm {} \;
