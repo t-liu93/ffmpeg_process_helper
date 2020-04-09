@@ -10,8 +10,8 @@ DSTARCH=toArchive
 DSTYOUT=toYoutube
 
 if [ ! -z "$line" ]; then
-    SRC=$(awk -F\  '{ print $1}' <<<"${line}")
-    DST=`echo $(awk -F\  '{ print $2}' <<<"${line}") | sed 's/\\r//g'`
+    SRC=$(awk -F\-\-\>  '{ print $1}' <<<"${line}")
+    DST=`echo $(awk -F\-\-\>  '{ print $2}' <<<"${line}") | sed 's/\\r//g'`
     if [ "$(ls -A $TMPV/$DSTBILI)" ] || [ "$(ls -A $TMPV/$DSTARCH)" ] || [ "$(ls -A $TMPV/$DSTYOUT)" ]; then
         echo "" > /dev/null
         # Still running do nothing
