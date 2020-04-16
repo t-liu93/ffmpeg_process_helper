@@ -7,7 +7,7 @@ line=$(head -n 1 $QUEUE)
 
 DSTBILI=toBilibiliScale
 DSTARCH=toArchive
-DSTH264=tohqH264
+DSTH264=hqH264
 
 if [ ! -z "$line" ]; then
     SRC=$(awk -F\-\-\>  '{ print $1}' <<<"${line}")
