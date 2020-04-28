@@ -9,11 +9,12 @@ DSTBILI=toBilibiliScale
 DSTARCH=toArchive
 DSTH264=hqH264
 DSTBILI4K=toBilibili4K
+DSTBILIHIGH=toBilibiliHigh
 
 if [ ! -z "$line" ]; then
     SRC=$(awk -F\-\-\>  '{ print $1}' <<<"${line}")
     DST=`echo $(awk -F\-\-\>  '{ print $2}' <<<"${line}") | sed 's/\\r//g'`
-    if [ "$(ls -A $TMPV/$DSTBILI)" ] || [ "$(ls -A $TMPV/$DSTARCH)" ] || [ "$(ls -A $TMPV/$DSTH264)" ] || [ "$(ls -A $TMPV/$DSTBILI4K)" ]; then
+    if [ "$(ls -A $TMPV/$DSTBILI)" ] || [ "$(ls -A $TMPV/$DSTARCH)" ] || [ "$(ls -A $TMPV/$DSTH264)" ] || [ "$(ls -A $TMPV/$DSTBILI4K)" ] || [ "$(ls -A $TMPV/$DSTBILIHIGH)" ]; then
         echo "" > /dev/null
         # Still running do nothing
     else
