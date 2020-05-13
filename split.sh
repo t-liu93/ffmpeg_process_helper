@@ -1,12 +1,12 @@
 #!/bin/bash
 
-OUTPUT=$1
+OUT=$1
 
-if [ -z "$OUTPUT" ]; then
+if [ -z "$OUT" ]; then
     echo "No output dir specified!"
     exit 1
 fi
-
+OUTPUT="$OUT"/录制
 mkdir -p $OUTPUT
 
 for file in $PWD/*.mkv; do
