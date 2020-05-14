@@ -16,8 +16,8 @@ inotifywait -m $WD -e create -e close_write -e moved_to -e modify |
         LOW=$(awk -F/ '{ print $2}' <<<"${FR}")
         FPS=$(expr $HIGH / $LOW)
         GOP=$(expr $FPS \* 8)
-        $FFMPEG/ffmpeg -y -i $WD/$file -i $WD/../bilibiliwatermark.png  -filter_complex "overlay=0:0,format=yuv420p,scale=w=1920:h=1080:sws_flags=lanczos" -c:v libx264 -preset slow -profile:v high -level 4.2 -x264-params "keyint=$GOP:min-keyint=1:bitrate=5850:vbv-maxrate=10000:vbv-bufsize=15000" -pass 1 -passlogfile /home/tianyu/ffmpeg/ffmpeglog -an -f mp4 /dev/null
-        $FFMPEG/ffmpeg -y -i $WD/$file -i $WD/../bilibiliwatermark.png  -filter_complex "overlay=0:0,format=yuv420p,scale=w=1920:h=1080:sws_flags=lanczos" -c:v libx264 -preset slow -profile:v high -level 4.2 -x264-params "keyint=$GOP:min-keyint=1:bitrate=5850:vbv-maxrate=10000:vbv-bufsize=15000" -pass 2 -passlogfile /home/tianyu/ffmpeg/ffmpeglog -c:a libfdk_aac -b:a 320k -ar 48000 $TMPFILE
+        $FFMPEG/ffmpeg -y -i $WD/$file -i $WD/../bilibiliwatermark.png  -filter_complex "overlay=0:0,format=yuv420p,scale=w=1920:h=1080:sws_flags=sinc" -c:v libx264 -preset slow -profile:v high -level 4.2 -x264-params "keyint=$GOP:min-keyint=1:bitrate=5850:vbv-maxrate=10000:vbv-bufsize=15000" -pass 1 -passlogfile /home/tianyu/ffmpeg/ffmpeglog -an -f mp4 /dev/null
+        $FFMPEG/ffmpeg -y -i $WD/$file -i $WD/../bilibiliwatermark.png  -filter_complex "overlay=0:0,format=yuv420p,scale=w=1920:h=1080:sws_flags=sinc" -c:v libx264 -preset slow -profile:v high -level 4.2 -x264-params "keyint=$GOP:min-keyint=1:bitrate=5850:vbv-maxrate=10000:vbv-bufsize=15000" -pass 2 -passlogfile /home/tianyu/ffmpeg/ffmpeglog -c:a libfdk_aac -b:a 320k -ar 48000 $TMPFILE
         OUTNAME=${file%.*}
         rm $WD/$file
         mv --backup=numbered $TMPFILE $OUTPUT/$OUTNAME.mp4
