@@ -25,5 +25,5 @@ for file in $PWD/*.mkv; do
     rm $file
 done
 
-chown -R tianyu:smb $OUTPUT
-chmod -R 0770 $OUTPUT
+chown -R tianyu:smb $OUT
+chmod -R 0770 $OUT
