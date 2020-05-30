@@ -11,7 +11,7 @@ mkdir -p $OUTPUT
 
 inotifywait -m $WD -e create -e close_write -e moved_to -e modify |
     while read dir action file; do
-        $FFMPEG/ffmpeg -y -i $WD/$file -i $WD/../bilibiliwatermark.png  -filter_complex "overlay=0:0,format=yuv420p" -c:v libx264 -preset slow -crf 14 -maxrate 58500k -bufsize 58500k -profile:v high -x264opts colorprim=bt709:transfer=bt709:colormatrix=bt709 -c:a libfdk_aac -b:a 320k -ar 48000 $TMPFILE
+        $FFMPEG/ffmpeg -y -filter_complex "format=yuv420p" -c:v libx264 -preset slow -crf 14 -maxrate 58500k -bufsize 58500k -profile:v high -x264opts colorprim=bt709:transfer=bt709:colormatrix=bt709 -c:a libfdk_aac -b:a 320k -ar 48000 $TMPFILE
         OUTNAME=${file%.*}
         rm $WD/$file
         mv --backup=numbered $TMPFILE $OUTPUT/"$OUTNAME".mp4
