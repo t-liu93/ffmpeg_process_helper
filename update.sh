@@ -6,7 +6,7 @@ FFBUILD="$HOME/ffmpeg_build"
 # remove
 sudo rm -rf $FFBUILD $FFMPEG/bin/{ffmpeg,ffprobe,ffplay,x264,x265} $FFMPEG/ffmpeg_sources
 
-sudo apt-get -y remove libx265-dev
+#sudo apt-get -y remove libx265-dev
 
 # Update dependencies
 sudo apt-get update -qq && sudo apt-get -y install \
@@ -44,15 +44,15 @@ PATH="$FFMPEG/bin:$PATH" make -j $(nproc) && \
 make install && \
 
 # libx265
-sudo apt-get -y install libx265-dev libnuma-dev && \
-#sudo apt-get install libnuma-dev && \
-#cd $FFMPEG/ffmpeg_sources && \
-#git -C x265_git pull 2> /dev/null || git clone --depth 1 https://bitbucket.org/multicoreware/x265_git && \
-#cd x265_git/build/linux && \
-#PATH="$FFMPEG/bin:$PATH" cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="$HOME/ffmpeg_build" -DENABLE_SHARED=off ../../source && \
-#PATH="$FFMPEG/bin:$PATH" make && \
-#make install && \
-# cp "$HOME/ffmpeg_build/bin/x265" "$FFMPEG/bin" && \
+#sudo apt-get -y install libx265-dev libnuma-dev && \
+sudo apt-get install libnuma-dev && \
+cd $FFMPEG/ffmpeg_sources && \
+git -C x265_git pull 2> /dev/null || git clone https://bitbucket.org/multicoreware/x265_git && \
+cd x265_git/build/linux && \
+PATH="$FFMPEG/bin:$PATH" cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="$HOME/ffmpeg_build" -DENABLE_SHARED=off ../../source && \
+PATH="$FFMPEG/bin:$PATH" make -j $(nproc) && \
+make install && \
+cp "$HOME/ffmpeg_build/bin/x265" "$FFMPEG/bin" && \
 
 # libvpx
 cd $FFMPEG/ffmpeg_sources && \
