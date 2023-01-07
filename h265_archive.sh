@@ -11,7 +11,7 @@ mkdir -p $OUTPUT
 
 inotifywait -m $WD -e create -e close_write -e moved_to -e modify |
     while read dir action file; do
-        $FFMPEG/ffmpeg -y -i $WD/$file -c:v libx265 -crf 20 -preset medium -profile:v main10 -pix_fmt yuv420p -c:a pcm_s24le -c:s copy $TMPFILE
+        $FFMPEG/ffmpeg -y -i $WD/$file -c:v libx265 -crf 20 -preset medium -profile:v main10 -pix_fmt yuv420p -tag:v hvc1 -c:a pcm_s24le -c:s copy $TMPFILE
         OUTNAME=${file%.*}
         rm $WD/$file
         mv --backup=numbered $TMPFILE $OUTPUT/$OUTNAME.mov
