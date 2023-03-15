@@ -26,7 +26,7 @@ OUTPATH=${OUT%/*}
 BASENAME=$(basename $IN)
 EXT=${BASENAME##*.}
 TEMPOUT=$OUTPATH/out.$EXT
-/home/tianyu/ffmpeg/bin/ffmpeg -y -i $IN -c:v copy -c:a copy -c:s copy -metadata creation_time="$CREATE_TIME" $TEMPOUT
+/home/tianyu/ffmpeg/bin/ffmpeg -y -i $IN -c:v copy -c:a copy -c:s copy -metadata creation_time="$CREATE_TIME" -metadata date="" $TEMPOUT
 
 mv $TEMPOUT $OUT
 chown -R tianyu:smb $OUT
