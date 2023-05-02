@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TMPV=/home/tianyu/NAS/TempVideo
+TMPV=/mnt/NAS/TempVideo
 QUEUE=$TMPV/queue
 
 line=$(head -n 1 $QUEUE)

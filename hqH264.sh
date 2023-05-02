@@ -1,7 +1,7 @@
 #!/bin/bash
 
 FFMPEG=/home/tianyu/ffmpeg/bin
-TMP=/home/tianyu/NAS/TempVideo
+TMP=/mnt/NAS/TempVideo
 WD=$TMP/hqH264
 OUTPUT=$TMP/output
 OUTFILE=$(date +"%Y-%m-%d_%H-%M-%S").mov
